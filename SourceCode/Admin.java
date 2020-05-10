@@ -1,28 +1,25 @@
+//package Payroll;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.sql.*;
 
 class Admin{
-	static int id=0;
 
-	//Getting unique Id
-	Admin(){
-		//Query to get max emp id
-	}
-
-	int addEmployee(double hourlyRate, double monthlyRate, double commissionRate, String modeOfPayment )
+	public static int addEmployee(double hourlyRate, double monthlyRate, double commissionRate, String modeOfPayment )
 	{
 		//Query to add employee
-		id++;
+		int id = connectDB.addEmp(hourlyRate, monthlyRate, commissionRate, modeOfPayment);		
 		
 		return id;
 	}
-	void delEmployee(int id)
+	public static void delEmployee(int id)
 	{
 		//Query DB to remove Employee
+		connectDB.delEmp(id);
 		
 	}
-	double calulatePayroll(int employeeId)
+	public static double calulatePayroll(int employeeId)
 	{
 		//Calculating Payroll
 		Employee emp = new Employee(employeeId);
@@ -37,6 +34,7 @@ class employeeUnion{
 	public static void unionCharges(int id, double charges)
 	{
 		//Query to add charges;
+		connectDB.add_union_charges(id, charges);
 		
 	}
 	public static void addMember(int emp_id)

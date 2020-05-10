@@ -1,3 +1,5 @@
+//package Payroll;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.sql.*;
@@ -28,7 +30,7 @@ public class Driver{
 		System.out.println("2. Add Member");
 	}
 
-	static void do_admin(int ch, Scanner scan, Admin ad)
+	static void do_admin(int ch, Scanner scan)
 	{
 		switch(ch)
 		{
@@ -40,19 +42,19 @@ public class Driver{
 					double commission = scan.nextDouble();
 					System.out.print("Enter mode of Payment :");
 					String s = scan.next();
-					int id = ad.addEmployee(hourlyRate, monthlyRate, commission, s);
+					int id = Admin.addEmployee(hourlyRate, monthlyRate, commission, s);
 					System.out.print("Employee added with employee id: " + id);
 					break;
 
 			case 2 : System.out.print("Enter employee id: ");
 					int empId = scan.nextInt();
-					ad.delEmployee(empId);
+					Admin.delEmployee(empId);
 					System.out.println("Removed!");
 					break;
 
 			case 3 : System.out.print("Enter employee id: ");
 					int emp_id = scan.nextInt();
-					ad.calulatePayroll(emp_id);
+					System.out.println(Admin.calulatePayroll(emp_id));
 					break;
 
 			default : System.out.println("INVALID CHOIE!");
@@ -128,19 +130,17 @@ public class Driver{
 
 		}
 	}
-	
 	public static void main(String[] args)
 	{
 		Scanner scan = new Scanner(System.in);
-		//connect_db();
+		connectDB.connect_db();
 		displayHome();
 		int choice = scan.nextInt();
 		switch(choice)
 		{
-			case 1 : Admin root = new Admin();
-				displayAdmin();
+			case 1 : displayAdmin();
 				int ch = scan.nextInt();
-				do_admin(ch, scan, root);
+				do_admin(ch, scan);
 				break;
 
 			case 2 : System.out.print("Enter employee id: ");
@@ -159,6 +159,6 @@ public class Driver{
 			default : System.out.println("INVALID CHOIE!");
 					  break;				
 		}
-		
+		connectDB.close_db();
 	}
 }

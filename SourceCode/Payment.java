@@ -1,5 +1,8 @@
+//package Payroll;
+
 import java.util.Scanner;
 import java.sql.*;
+//import connectDB.;
 
 interface PayProcess{
 	double calculate(Date d);
@@ -21,11 +24,13 @@ class Hourly implements PayProcess{
 	public void update_hourly_rate(double hourlyRate)
 	{
 		this.hourlyRate = hourlyRate;
+		//Update DB
+		connectDB.update_hourly_rate(id, hourlyRate);
 	}
 	public double calculate(Date d)
 	{
-		int hours = 0;
 		//Query to calculate hours from DB
+		double hours = connectDB.calculate_hours(id, d);
 		return hours*hourlyRate;
 	}
 }
@@ -45,10 +50,12 @@ class Monthly implements PayProcess{
 	}
 	public void update_monthly_rate(double monthlyRate)
 	{
-		this.monthlyRate = monthlyRate;
+		connectDB.update_monthly_rate(id, monthlyRate);
 	}
 	public double calculate(Date d)
 	{
+		//Condition for checking last working day
+
 		return monthlyRate;
 	}
 }
@@ -69,12 +76,15 @@ class commission implements PayProcess{
 	public void update_commission_rate(double commissionRate)
 	{
 		this.commissionRate = commissionRate;
+		//UPDATE DB
+		connectDB.update_commission_rate(id, commissionRate);
 	}
 	public double calculate(Date d)
 	{
-		double sales = 0;
 		//Query to calculate sales from DB
-		return (sales*commissionRate/100);
+		double totalSale = connectDB.calculate_total_sale(id,d);
+			
+		return (totalSale*commissionRate/100);
 	}
 }
 
@@ -87,8 +97,8 @@ class unionCharges implements PayProcess{
 
 	public double calculate(Date d)
 	{
-		double dues = 0;
 		//Query to calculate union dues
+		double dues = connectDB.calculate_dues(id,d);
 		return -1*dues;
 	}
 }
