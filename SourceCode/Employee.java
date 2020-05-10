@@ -2,8 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.sql.*;
 
-import java.sql.*;
-
 class Timecard{
 	private int employeeId;
 	private Date date;
