@@ -89,6 +89,6 @@ class unionCharges implements PayProcess{
 	{
 		double dues = 0;
 		//Query to calculate union dues
-		return dues;
+		return -1*dues;
 	}
 }

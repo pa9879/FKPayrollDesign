@@ -55,6 +55,17 @@ public class Employee{
 		
 	}
 
+	//Calculate income of Employee
+	double CalculatePay()
+	{
+		double pay = 0;
+		for(PayProcess p: modes)
+		{
+			pay += p.calculate(lastPayment);
+		}
+		return pay;
+	}
+
 	//Update Details Of Employee
 	public void update_hourly_rate(double hourlyRate)
 	{
