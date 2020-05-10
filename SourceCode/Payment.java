@@ -1,5 +1,8 @@
+import java.util.Scanner;
+import java.sql.*;
+
 interface PayProcess{
-	double calculate();
+	double calculate(Date d);
 }
 
 class Hourly implements PayProcess{
@@ -19,7 +22,7 @@ class Hourly implements PayProcess{
 	{
 		this.hourlyRate = hourlyRate;
 	}
-	public double calculate()
+	public double calculate(Date d)
 	{
 		int hours = 0;
 		//Query to calculate hours from DB
@@ -44,7 +47,7 @@ class Monthly implements PayProcess{
 	{
 		this.monthlyRate = monthlyRate;
 	}
-	public double calculate()
+	public double calculate(Date d)
 	{
 		return monthlyRate;
 	}
@@ -67,7 +70,7 @@ class commission implements PayProcess{
 	{
 		this.commissionRate = commissionRate;
 	}
-	public double calculate()
+	public double calculate(Date d)
 	{
 		double sales = 0;
 		//Query to calculate sales from DB
@@ -82,7 +85,7 @@ class unionCharges implements PayProcess{
 		this.id = id;
 	}
 
-	public double calculate()
+	public double calculate(Date d)
 	{
 		double dues = 0;
 		//Query to calculate union dues

@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.sql.*;
+
 import java.sql.*;
 
 class Timecard{
@@ -22,10 +25,11 @@ class Timecard{
 
 public class Employee{
 	private final int id;
-	private double hourlyRate;
-	private double monthlyRate;
-	private double dues;
-	private double commissionRate;
+	private Hourly hourlyPay;
+	private Monthly monthlyPay;
+	private commission commissionPay;
+	private unionCharges dues;
+	ArrayList<PayProcess> modes;
 	Timecard t1;
 	String modeOfPayment;
 	Date lastPayment;
@@ -54,19 +58,15 @@ public class Employee{
 	//Update Details Of Employee
 	public void update_hourly_rate(double hourlyRate)
 	{
-		this.hourlyRate = hourlyRate;
+		hourlyPay.update_hourly_rate(hourlyRate);
 	}
 	public void update_monthly_rate(double monthlyRate)
 	{
-		this.monthlyRate = monthlyRate;
+		monthlyPay.update_monthly_rate(monthlyRate);
 	}
 	public void update_commission_rate(double commissionRate)
 	{
-		this.commissionRate = commissionRate;
-	}
-	public void update_dues(double dues)
-	{
-		this.dues = dues;
+		commissionPay.update_commission_rate(commissionRate);
 	}
 	public void update_modeOfPayment(String s)
 	{
@@ -80,19 +80,15 @@ public class Employee{
 	//Get values
 	public double get_hourly_rate()
 	{
-		return hourlyRate;
+		return hourlyPay.get_hourly_rate();
 	}
 	public double get_monthly_rate()
 	{
-		return monthlyRate;
+		return monthlyPay.get_monthly_rate();
 	}
 	public double get_commission_rate()
 	{
-		return commissionRate;
-	}
-	public double get_dues()
-	{
-		 return dues;
+		return commissionPay.get_commission_rate();
 	}
 	public String get_modeOfPayment()
 	{
