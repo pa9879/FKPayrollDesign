@@ -55,6 +55,7 @@ public class Driver{
 			case 3 : System.out.print("Enter employee id: ");
 					int emp_id = scan.nextInt();
 					System.out.println(Admin.calulatePayroll(emp_id));
+					Admin.payroll();
 					break;
 
 			default : System.out.println("INVALID CHOIE!");

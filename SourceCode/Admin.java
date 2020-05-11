@@ -26,6 +26,23 @@ class Admin{
 		double pay = emp.CalculatePay();
 		return pay;
 	}
+	public static void payroll()
+	{
+		try{
+			ResultSet res=connectDB.stmt.executeQuery("select id, modeOfPayment from Employee");  
+				while (res.next()) {
+					System.out.println("lawde ho tum");   
+					int id = res.getInt(1);
+					String s = res.getString(2);
+					double d = Admin.calulatePayroll(id);
+					System.out.println("Transfered "+ d+ " amount to " + id+"via "+ s);   
+				}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+	}
 }
 
 class employeeUnion{
